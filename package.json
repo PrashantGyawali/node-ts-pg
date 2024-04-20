@@ -1,0 +1,26 @@
+{
+  "name": "sql-rest",
+  "version": "1.0.0",
+  "description": "node postgres typescript rest api",
+  "main": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "tsc-watch --onSuccess \"node dist/index.js\"",
+    "build": "tsc",
+    "start": "node ./dist/index.js"
+  },
+  "author": "PG",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.7",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "pg": "^8.11.5"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.11.5",
+    "tsc-watch": "^6.2.0",
+    "typescript": "^5.4.5"
+  }
+}
