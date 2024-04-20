@@ -12,6 +12,7 @@ async function getStudents(_req: Request, res: Response) {
             if (err) {
                 console.error(err);
                 InternalError(res);
+                return
             }
             else {
                 let students: Student[] = results.rows as Student[];
@@ -30,6 +31,7 @@ function getStudentById(req: Request, res: Response) {
             if (err) {
                 console.error(err);
                 InternalError(res);
+                return
             }
             else {
                 let student: Student = results.rows[0];
@@ -86,7 +88,8 @@ function removeStudent(req: Request, res: Response) {
             db.query(queries.getStudentById, [studentId], (err, results) => {
 
                 if (err) {
-                    InternalError(res)
+                    InternalError(res);
+                    return
                 }
                 if (results.rows.length == 0) {
                     res.status(400).json({ error: "Student does not exist" })
@@ -148,7 +151,11 @@ function updateStudent(req: Request, res: Response) {
                 else{
                     db.query(queries.checkEmailExists,[studentData.email],(err,result)=>{
 
-                        err && InternalError(res);
+                        if(err)
+                        {
+                            InternalError(res);
+                            return
+                        }
                         if(result.rows.length>0 && result?.rows[0]?.id!=id)
                         {
                             res.status(400).json({error:"Email already exists"});
